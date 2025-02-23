@@ -1,12 +1,12 @@
 [workspace]
 members = [
-    "cli",
-    "cron",
-    "plugin",
-    "programs/*",
-    # "relayer",
-    "sdk",
-    "utils"
+  "cli",
+  "cron",
+  "plugin",
+  "programs/*",
+  # "relayer",
+  "sdk",
+  "utils",
 ]
 
 [profile.release]
