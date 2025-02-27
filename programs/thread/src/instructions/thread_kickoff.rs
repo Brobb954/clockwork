@@ -5,7 +5,7 @@ use std::{
 };
 
 use anchor_lang::prelude::*;
-use chrono::{DateTime, NaiveDateTime, Utc};
+use chrono::{DateTime, Utc};
 use clockwork_cron::Schedule;
 use clockwork_network_program::state::{Worker, WorkerAccount};
 use clockwork_utils::thread::Trigger;
@@ -277,10 +277,7 @@ pub fn handler(ctx: Context<ThreadKickoff>) -> Result<()> {
 fn next_timestamp(after: i64, schedule: String) -> Option<i64> {
     Schedule::from_str(&schedule)
         .unwrap()
-        .next_after(&DateTime::<Utc>::from_naive_utc_and_offset(
-            NaiveDateTime::from_timestamp_opt(after, 0).unwrap(),
-            Utc,
-        ))
+        .next_after(&DateTime::<Utc>::from_timestamp(after, 0).expect("Valid Timestamp"))
         .take()
         .map(|datetime| datetime.timestamp())
 }
